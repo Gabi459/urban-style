@@ -1,0 +1,298 @@
+/* =========================================================
+   Urban Style · Hoja de estilos
+   Estética urbana: hormigón, denim y amarillo de señalización.
+   ========================================================= */
+
+/* Colores y valores que se repiten en toda la página */
+:root {
+  --hormigon: #E2E3DE;
+  --superficie: #FBFBF9;
+  --tinta: #1C1F24;
+  --tinta-suave: #585E68;
+  --linea: #C9CBC4;
+  --denim: #2B4A6F;
+  --denim-oscuro: #1E3550;
+  --senal: #F4C21B;
+  --ok: #2F7D4F;
+  --error: #B42318;
+
+  --sombra: 4px 4px 0 var(--tinta);
+  --radio: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Tipografía clara y fondo general */
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--tinta);
+  background: var(--hormigon);
+}
+
+h1, h2 {
+  margin: 0 0 0.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+/* ---------- Cabecera de sesión ---------- */
+.cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--tinta);
+  color: #fff;
+}
+
+.cabecera h1 {
+  margin: 0;
+}
+
+.info-cabecera {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.9rem;
+}
+
+/* Rol del usuario en forma de etiqueta redonda */
+.etiqueta-rol {
+  padding: 0.1rem 0.6rem;
+  border: 1px solid #fff;
+  border-radius: 999px;
+}
+
+/* Indicador de conexión: un punto verde o rojo según el estado */
+.conexion::before {
+  content: "";
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  background: var(--linea);
+}
+
+.conexion[data-estado="online"]::before {
+  background: #4CC37A;
+}
+
+.conexion[data-estado="offline"]::before {
+  background: #F0645A;
+}
+
+/* ---------- Contenido principal ---------- */
+main {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Diseño en tarjetas */
+.tarjeta {
+  padding: 1.5rem;
+  background: var(--superficie);
+  border: 2px solid var(--tinta);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+/* ---------- Perfil ---------- */
+.datos-perfil {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.dato {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.etiqueta {
+  color: var(--tinta-suave);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* ---------- Oferta relámpago ---------- */
+.oferta {
+  background: var(--senal);
+}
+
+.contador {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 4rem;
+  line-height: 1;
+}
+
+/* Cuando la oferta termina el banner se pone gris */
+.oferta[data-estado="expirada"] {
+  background: #D6D7D2;
+}
+
+/* ---------- Tienda: catálogo + carrito ---------- */
+.tienda {
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* En pantallas grandes el catálogo y el carrito se ponen uno al lado del otro */
+@media (min-width: 800px) {
+  .tienda {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.productos {
+  display: grid;
+  gap: 0.6rem;
+}
+
+/* Cada prenda del catálogo */
+.producto {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--linea);
+  border-radius: var(--radio);
+  cursor: pointer;
+}
+
+/* Prenda marcada */
+.producto:has(input:checked) {
+  border-color: var(--denim);
+  background: #EEF2F7;
+}
+
+/* Campos de texto */
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  border: 2px solid var(--tinta);
+  border-radius: 4px;
+}
+
+.cupon {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Desglose de la compra */
+.desglose {
+  margin: 1.2rem 0;
+}
+
+.linea-precio {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed var(--linea);
+}
+
+.linea-precio.total {
+  border-bottom: none;
+  border-top: 2px solid var(--tinta);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+/* ---------- Botones de acción ---------- */
+.boton {
+  padding: 0.7rem 1.2rem;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: var(--denim);
+  border: 2px solid var(--tinta);
+  border-radius: 4px;
+  box-shadow: var(--sombra);
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--denim-oscuro);
+}
+
+/* Efecto de pulsar el botón */
+.boton:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--tinta);
+}
+
+/* ---------- Avisos (indicadores de estado) ---------- */
+.aviso:empty {
+  display: none; /* si no hay mensaje no se ve */
+}
+
+.aviso {
+  margin-top: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-left: 4px solid var(--denim);
+  background: #EEF2F7;
+}
+
+.aviso[data-tipo="ok"] {
+  border-color: var(--ok);
+  background: #E9F4EE;
+}
+
+.aviso[data-tipo="error"] {
+  border-color: var(--error);
+  background: #FBECEA;
+}
+
+/* ---------- Opiniones ---------- */
+#formularioResena textarea {
+  margin-bottom: 0.8rem;
+}
+
+.lista-resenas {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.resena {
+  padding: 0.8rem 1rem;
+  border-left: 4px solid var(--denim);
+  background: #F1F2EE;
+}
+
+.resena p {
+  margin: 0.3rem 0 0;
+  white-space: pre-wrap; /* respeta los saltos de línea del comentario */
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Pie ---------- */
+.pie {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--tinta-suave);
+  font-size: 0.85rem;
+}
