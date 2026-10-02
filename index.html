@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <!-- Permitimos tildes, ñ, € y otros caracteres -->
+    <meta charset="UTF-8">
+
+    <!-- Hacemos que la página se adapte a móviles y tablets -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Título que aparece en la pestaña -->
+    <title>Urban Style</title>
+
+    <!-- Conectamos el archivo CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Script de analítica externa (Google Analytics) -->
+    <!-- async hace que se descargue sin bloquear la página y se ejecute en cuanto llegue -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+
+    <!-- Configuramos Google Analytics -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Conectamos el archivo JavaScript -->
+    <!-- defer hace que se ejecute cuando el HTML ya está cargado, así el DOM está disponible -->
+    <script src="app.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- CABECERA DE SESIÓN -->
+    <header class="cabecera">
+
+        <!-- Nombre de la tienda -->
+        <h1>Urban Style</h1>
+
+        <!-- Información de la sesión -->
+        <div class="info-cabecera">
+
+            <!-- Fecha actual -->
+            <span id="fecha"></span>
+
+            <!-- Saludo del usuario -->
+            <span id="saludo"></span>
+
+            <!-- Tipo de usuario -->
+            <span id="rol" class="etiqueta-rol"></span>
+
+            <!-- Estado de la conexión -->
+            <span id="conexion" class="conexion"></span>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+
+
+        <!-- PERFIL DEL USUARIO Y SESIÓN -->
+        <section class="tarjeta">
+
+            <h2>Perfil y sesión</h2>
+
+            <!-- Datos principales del usuario -->
+            <div class="datos-perfil">
+
+                <!-- Email -->
+                <div class="dato">
+                    <span class="etiqueta">Email</span>
+                    <span id="email"></span>
+                </div>
+
+                <!-- Nombre de usuario del email -->
+                <div class="dato">
+                    <span class="etiqueta">Usuario</span>
+                    <span id="usuario"></span>
+                </div>
+
+                <!-- Dominio del email -->
+                <div class="dato">
+                    <span class="etiqueta">Dominio</span>
+                    <span id="dominio"></span>
+                </div>
+
+                <!-- ID del cliente -->
+                <div class="dato">
+                    <span class="etiqueta">ID Cliente</span>
+                    <span id="idCliente"></span>
+                </div>
+
+                <!-- Apodo -->
+                <div class="dato">
+                    <span class="etiqueta">Apodo</span>
+                    <span id="apodo"></span>
+                </div>
+
+                <!-- Tipo de membresía -->
+                <div class="dato">
+                    <span class="etiqueta">Membresía</span>
+                    <span id="membresia"></span>
+                </div>
+
+                <!-- Número de prendas de regalo -->
+                <div class="dato">
+                    <span class="etiqueta">Prendas de regalo</span>
+                    <span id="prendasRegalo"></span>
+                </div>
+
+                <!-- Idioma del navegador -->
+                <div class="dato">
+                    <span class="etiqueta">Idioma</span>
+                    <span id="idioma"></span>
+                </div>
+
+                <!-- ID de la sesión -->
+                <div class="dato">
+                    <span class="etiqueta">ID Sesión</span>
+                    <span id="sesionId"></span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BANNER DE OFERTA RELÁMPAGO -->
+        <section id="oferta" class="tarjeta oferta">
+
+            <h2>Oferta Relámpago</h2>
+
+            <p>Descuento exclusivo del 20% durante 15 segundos.</p>
+
+            <!-- Contador de segundos -->
+            <strong id="contadorOferta" class="contador">15</strong>
+
+            <!-- Mensaje del estado de la oferta -->
+            <p id="estadoOferta">Oferta disponible</p>
+
+            <!-- Botón para activar la oferta -->
+            <button id="activarOferta" type="button" class="boton">
+                Activar Oferta Relámpago
+            </button>
+
+        </section>
+
+
+        <!-- TIENDA -->
+        <section class="tienda">
+
+
+            <!-- CATÁLOGO -->
+            <div class="tarjeta">
+
+                <h2>Catálogo</h2>
+
+                <!-- Aquí JavaScript añade las prendas -->
+                <div id="catalogoProductos" class="productos"></div>
+
+            </div>
+
+
+            <!-- CARRITO -->
+            <div class="tarjeta">
+
+                <h2>Carrito</h2>
+
+                <!-- Cupón de descuento -->
+                <label for="cupon">Cupón de descuento (€)</label>
+
+                <div class="cupon">
+                    <input type="text" id="cupon" placeholder="Ejemplo: 10">
+                    <button id="aplicarCupon" type="button" class="boton">Aplicar</button>
+                </div>
+
+
+                <!-- DESGLOSE DE LA COMPRA -->
+                <div class="desglose">
+
+                    <!-- Precio antes de descuentos -->
+                    <div class="linea-precio">
+                        <span>Subtotal</span>
+                        <span id="subtotal">0,00 €</span>
+                    </div>
+
+                    <!-- Descuento del cupón -->
+                    <div class="linea-precio">
+                        <span>Descuento</span>
+                        <span id="descuento">0,00 €</span>
+                    </div>
+
+                    <!-- IVA -->
+                    <div class="linea-precio">
+                        <span>IVA (21%)</span>
+                        <span id="iva">0,00 €</span>
+                    </div>
+
+                    <!-- Precio final -->
+                    <div class="linea-precio total">
+                        <span>Total a pagar</span>
+                        <strong id="total">0,00 €</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Número del pedido actual -->
+                <p class="pedido">
+                    Número de pedido: <strong id="numeroPedido">1</strong>
+                </p>
+
+                <!-- Botón para procesar el pedido -->
+                <button id="procesarPedido" type="button" class="boton">
+                    Procesar pedido
+                </button>
+
+                <!-- Mensaje de aviso del carrito -->
+                <p id="avisoCarrito" class="aviso" role="alert"></p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECCIÓN DE OPINIONES -->
+        <section class="tarjeta">
+
+            <h2>Opiniones</h2>
+
+            <!-- FORMULARIO PARA ESCRIBIR UNA RESEÑA -->
+            <form id="formularioResena">
+
+                <label for="textoResena">Tu opinión</label>
+
+                <textarea id="textoResena" rows="4" placeholder="Escribe tu opinión sobre nuestras prendas..."></textarea>
+
+                <!-- Botón para enviar la reseña -->
+                <button type="submit" class="boton">Publicar opinión</button>
+
+                <!-- Mensaje de aviso -->
+                <p id="avisoResena" class="aviso" role="alert"></p>
+
+            </form>
+
+            <!-- JavaScript coloca aquí las reseñas -->
+            <div id="listaResenas" class="lista-resenas"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="pie">
+        <p>© 2026 Urban Style. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
